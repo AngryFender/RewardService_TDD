@@ -6,4 +6,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_rewardstesting.cpp
+SOURCES +=  tst_rewardstesting.cpp \
+    rewardservice.cpp
+
+HEADERS += \
+    rewardservice.h
