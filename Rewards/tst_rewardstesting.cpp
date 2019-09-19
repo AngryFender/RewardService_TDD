@@ -1,15 +1,24 @@
 #include <QtTest>
 
+enum list_subscriptions{
+    CHANNEL_SPORTS,
+    CHANNEL_KIDS,
+    CHANNEL_MUSIC,
+    CHANNEL_NEWS,
+    CHANNEL_MOVIES,
+    CHANNEL_OUT_OF_RANGE,
+};
+
 class RewardService{
     unsigned int _accountNo;
-    unsigned int _subscription;
+    list_subscriptions _subscription;
 
 public:
     void set_accountNo(unsigned int accountNo){
         _accountNo = accountNo;
     }
 
-    void set_subscription(unsigned int subscription){
+    void set_subscription(list_subscriptions subscription){
         _subscription = subscription;
     }
 
@@ -21,7 +30,7 @@ public:
     unsigned int showAccountNo(RewardService& rewardService){
         return rewardService._accountNo;
     }
-    unsigned int showSubscription(RewardService& rewardService){
+    list_subscriptions showSubscription(RewardService& rewardService){
         return rewardService._subscription;
     }
 };
@@ -57,8 +66,8 @@ void RewardsTesting::test_accepts_account_number_subscription()
     rewardService.set_accountNo(123);
     QCOMPARE(accessRewardServ.showAccountNo(rewardService), 123);
 
-    rewardService.set_subscription(1);
-    QCOMPARE(accessRewardServ.showSubscription(rewardService), 1);
+    rewardService.set_subscription(CHANNEL_SPORTS);
+    QCOMPARE(accessRewardServ.showSubscription(rewardService), CHANNEL_SPORTS);
 }
 
 QTEST_APPLESS_MAIN(RewardsTesting)
