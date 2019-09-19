@@ -13,6 +13,7 @@ public:
 private slots:
     void test_accepts_account_number_subscription();
     void test_sends_account_number();
+    void test_accepts_eligibility();
 
 };
 
@@ -49,7 +50,22 @@ void RewardsTesting::test_sends_account_number()
 
     const Access_mock_Eligibility accessMockEligibility;
 
-    QCOMPARE(accessMockEligibility.get_accountNo(mock_eligibility), 123);
+    QCOMPARE(accessMockEligibility.get_accountNo(mock_eligibility),123);
+}
+
+void RewardsTesting::test_accepts_eligibility()
+{
+    RewardService  rewardService;
+    Mock_EligibilityService mock_eligibility;
+    connect( &mock_eligibility,SIGNAL(signal_send_eligibility(unsigned int)),&rewardService,SLOT(slot_accept_eligibility(unsigned int)));
+
+    Access_mock_Eligibility accessMockEligibility;
+    accessMockEligibility.set_eligibility(mock_eligibility,3);
+
+    mock_eligibility.send_eligibility();
+
+    const AccessRewardServ accessRewardServ;
+    QCOMPARE(accessRewardServ.showEligibility(rewardService),3);
 }
 
 QTEST_APPLESS_MAIN(RewardsTesting)

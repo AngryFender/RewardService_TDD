@@ -17,6 +17,7 @@ class RewardService : public QObject
     Q_OBJECT
     unsigned int _accountNo;
     list_subscriptions _subscription;
+    unsigned int _eligibility;
 
 public:
     explicit RewardService(QObject *parent = nullptr);
@@ -39,6 +40,9 @@ public:
 signals:
     void signal_send_accountNo( unsigned int accountNo) const;
 public slots:
+    void slot_accept_eligibility(unsigned int eligibility){
+        _eligibility = eligibility;
+    }
 };
 
 
@@ -49,6 +53,9 @@ public:
     }
     list_subscriptions showSubscription(const RewardService& rewardService)const {
         return rewardService._subscription;
+    }
+    unsigned int showEligibility(const RewardService& rewardService) const{
+        return rewardService._eligibility;
     }
 };
 
