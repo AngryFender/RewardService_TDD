@@ -15,6 +15,7 @@ private slots:
     void test_sends_account_number();
     void test_accepts_eligibility();
     void test_show_rewards_when_eligibile();
+    void test_show_rewards_when_ineligible();
 
 };
 
@@ -76,6 +77,14 @@ void RewardsTesting::test_show_rewards_when_eligibile()
     rewardService.slot_accept_eligibility(CUSTOMER_ELIGIBLE);
 
     QCOMPARE(rewardService.get_rewards(),"Champions League Final Tickets");
+}
+
+void RewardsTesting::test_show_rewards_when_ineligible()
+{
+    RewardService  rewardService;
+    rewardService.slot_accept_eligibility(CUSTOMER_INELIGIBLE);
+
+    QCOMPARE(rewardService.get_rewards(),"No rewards");
 }
 
 
