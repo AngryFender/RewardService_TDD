@@ -30,10 +30,14 @@ public:
         _subscription = subscription;
     }
 
+    void send_accountNo()const{
+        emit signal_send_accountNo(_accountNo);
+    }
+
     friend class AccessRewardServ;
 
 signals:
-
+    void signal_send_accountNo( unsigned int accountNo) const;
 public slots:
 };
 
