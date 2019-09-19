@@ -18,13 +18,6 @@ enum list_eligibility{
     INVALID_ACCOUNT_NUMBER_EXCEPTION
 };
 
-enum list_eligibleRewards{
-    CHAMPIONS_LEAGUE_FINAL_TICKETS,
-    NA,
-    KARAOKE_PRO_MICROPHONE,
-    PIRATES_OF_THE_CARRIBEAN_COLLECTION
-};
-
 class RewardService : public QObject
 {
     Q_OBJECT
