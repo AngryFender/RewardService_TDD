@@ -16,6 +16,7 @@ private slots:
     void test_accepts_eligibility();
     void test_show_rewards_when_eligibile();
     void test_show_rewards_when_ineligible();
+    void test_show_rewards_when_technical_failure_exception();
 
 };
 
@@ -83,6 +84,14 @@ void RewardsTesting::test_show_rewards_when_ineligible()
 {
     RewardService  rewardService;
     rewardService.slot_accept_eligibility(CUSTOMER_INELIGIBLE);
+
+    QCOMPARE(rewardService.get_rewards(),"No rewards");
+}
+
+void RewardsTesting::test_show_rewards_when_technical_failure_exception()
+{
+    RewardService  rewardService;
+    rewardService.slot_accept_eligibility(TECHNICAL_FAILURE_EXCEPTION);
 
     QCOMPARE(rewardService.get_rewards(),"No rewards");
 }
