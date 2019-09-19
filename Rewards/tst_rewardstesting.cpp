@@ -27,10 +27,10 @@ public:
 
 class AccessRewardServ{
 public:
-    unsigned int showAccountNo(RewardService& rewardService){
+    unsigned int showAccountNo(const RewardService& rewardService)const{
         return rewardService._accountNo;
     }
-    list_subscriptions showSubscription(RewardService& rewardService){
+    list_subscriptions showSubscription(const RewardService& rewardService)const {
         return rewardService._subscription;
     }
 };
@@ -61,7 +61,7 @@ RewardsTesting::~RewardsTesting()
 void RewardsTesting::test_accepts_account_number_subscription()
 {
     RewardService   rewardService;
-    AccessRewardServ accessRewardServ;
+    const AccessRewardServ accessRewardServ;
 
     rewardService.set_accountNo(123);
     QCOMPARE(accessRewardServ.showAccountNo(rewardService), 123);
