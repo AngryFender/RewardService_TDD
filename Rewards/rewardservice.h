@@ -8,8 +8,7 @@ enum list_subscriptions{
     CHANNEL_KIDS,
     CHANNEL_MUSIC,
     CHANNEL_NEWS,
-    CHANNEL_MOVIES,
-    CHANNEL_OUT_OF_RANGE,
+    CHANNEL_MOVIES
 };
 
 enum list_eligibility{
@@ -17,6 +16,13 @@ enum list_eligibility{
     CUSTOMER_INELIGIBLE,
     TECHNICAL_FAILURE_EXCEPTION,
     INVALID_ACCOUNT_NUMBER_EXCEPTION
+};
+
+enum list_eligibleRewards{
+    CHAMPIONS_LEAGUE_FINAL_TICKETS,
+    NA,
+    KARAOKE_PRO_MICROPHONE,
+    PIRATES_OF_THE_CARRIBEAN_COLLECTION
 };
 
 class RewardService : public QObject
@@ -42,6 +48,25 @@ public:
         emit signal_send_accountNo(_accountNo);
     }
 
+    QString get_rewards()const{
+        QString reward = "No rewards";
+        switch (_eligibility) {
+        case CUSTOMER_ELIGIBLE:{
+                switch (_subscription) {
+                case CHANNEL_SPORTS:    reward = "Champions League Final Tickets";      break;
+                case CHANNEL_KIDS:                                                      break;
+                case CHANNEL_MUSIC:     reward = "Karaoke Pro Microphone";              break;
+                case CHANNEL_NEWS:                                                      break;
+                case CHANNEL_MOVIES:    reward = "Pirates of the Carribean Collection"; break;
+                }
+                break;}
+        case CUSTOMER_INELIGIBLE:;break;
+        case TECHNICAL_FAILURE_EXCEPTION:;break;
+        case INVALID_ACCOUNT_NUMBER_EXCEPTION:;break;
+        }
+        return reward;
+    }
+
     friend class AccessRewardServ;
 
 signals:
@@ -50,6 +75,7 @@ public slots:
     void slot_accept_eligibility(list_eligibility eligibility){
         _eligibility = eligibility;
     }
+
 };
 
 
@@ -61,7 +87,7 @@ public:
     list_subscriptions showSubscription(const RewardService& rewardService)const {
         return rewardService._subscription;
     }
-    unsigned int showEligibility(const RewardService& rewardService) const{
+    list_eligibility showEligibility(const RewardService& rewardService) const{
         return rewardService._eligibility;
     }
 };
