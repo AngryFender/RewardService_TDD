@@ -51,15 +51,7 @@ public:
     QString get_rewards()const{
         QString reward = "No rewards";
         switch (_eligibility) {
-        case CUSTOMER_ELIGIBLE:{
-                switch (_subscription) {
-                case CHANNEL_SPORTS:    reward = "Champions League Final Tickets";      break;
-                case CHANNEL_KIDS:                                                      break;
-                case CHANNEL_MUSIC:     reward = "Karaoke Pro Microphone";              break;
-                case CHANNEL_NEWS:                                                      break;
-                case CHANNEL_MOVIES:    reward = "Pirates of the Carribean Collection"; break;
-                }
-                break;}
+        case CUSTOMER_ELIGIBLE: reward = get_eligibleReward();break;
         case CUSTOMER_INELIGIBLE:;break;
         case TECHNICAL_FAILURE_EXCEPTION:;break;
         case INVALID_ACCOUNT_NUMBER_EXCEPTION:;break;
@@ -75,7 +67,18 @@ public slots:
     void slot_accept_eligibility(list_eligibility eligibility){
         _eligibility = eligibility;
     }
-
+private:
+    QString get_eligibleReward()const{
+        QString reward = "NA";
+        switch (_subscription) {
+        case CHANNEL_SPORTS:    reward = "Champions League Final Tickets";      break;
+        case CHANNEL_KIDS:                                                      break;
+        case CHANNEL_MUSIC:     reward = "Karaoke Pro Microphone";              break;
+        case CHANNEL_NEWS:                                                      break;
+        case CHANNEL_MOVIES:    reward = "Pirates of the Carribean Collection"; break;
+        }
+        return reward;
+    }
 };
 
 
