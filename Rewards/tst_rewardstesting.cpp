@@ -57,15 +57,15 @@ void RewardsTesting::test_accepts_eligibility()
 {
     RewardService  rewardService;
     Mock_EligibilityService mock_eligibility;
-    connect( &mock_eligibility,SIGNAL(signal_send_eligibility(unsigned int)),&rewardService,SLOT(slot_accept_eligibility(unsigned int)));
+    connect( &mock_eligibility,SIGNAL(signal_send_eligibility(list_eligibility)),&rewardService,SLOT(slot_accept_eligibility(list_eligibility)));
 
     Access_mock_Eligibility accessMockEligibility;
-    accessMockEligibility.set_eligibility(mock_eligibility,3);
+    accessMockEligibility.set_eligibility(mock_eligibility,CUSTOMER_ELIGIBLE);
 
     mock_eligibility.send_eligibility();
 
     const AccessRewardServ accessRewardServ;
-    QCOMPARE(accessRewardServ.showEligibility(rewardService),3);
+    QCOMPARE(accessRewardServ.showEligibility(rewardService),CUSTOMER_ELIGIBLE);
 }
 
 QTEST_APPLESS_MAIN(RewardsTesting)

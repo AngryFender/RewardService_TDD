@@ -12,12 +12,19 @@ enum list_subscriptions{
     CHANNEL_OUT_OF_RANGE,
 };
 
+enum list_eligibility{
+    CUSTOMER_ELIGIBLE,
+    CUSTOMER_INELIGIBLE,
+    TECHNICAL_FAILURE_EXCEPTION,
+    INVALID_ACCOUNT_NUMBER_EXCEPTION
+};
+
 class RewardService : public QObject
 {
     Q_OBJECT
     unsigned int _accountNo;
     list_subscriptions _subscription;
-    unsigned int _eligibility;
+    list_eligibility _eligibility;
 
 public:
     explicit RewardService(QObject *parent = nullptr);
@@ -40,7 +47,7 @@ public:
 signals:
     void signal_send_accountNo( unsigned int accountNo) const;
 public slots:
-    void slot_accept_eligibility(unsigned int eligibility){
+    void slot_accept_eligibility(list_eligibility eligibility){
         _eligibility = eligibility;
     }
 };
