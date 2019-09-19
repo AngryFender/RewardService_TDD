@@ -17,6 +17,7 @@ private slots:
     void test_show_rewards_when_eligibile();
     void test_show_rewards_when_ineligible();
     void test_show_rewards_when_technical_failure_exception();
+    void test_show_rewards_when_invalid_account_number_exception();
 
 };
 
@@ -94,6 +95,14 @@ void RewardsTesting::test_show_rewards_when_technical_failure_exception()
     rewardService.slot_accept_eligibility(TECHNICAL_FAILURE_EXCEPTION);
 
     QCOMPARE(rewardService.get_rewards(),"No rewards");
+}
+
+void RewardsTesting::test_show_rewards_when_invalid_account_number_exception()
+{
+    RewardService  rewardService;
+    rewardService.slot_accept_eligibility(INVALID_ACCOUNT_NUMBER_EXCEPTION);
+
+    QCOMPARE(rewardService.get_rewards(),"No rewards, the account number entered is invalid");
 }
 
 

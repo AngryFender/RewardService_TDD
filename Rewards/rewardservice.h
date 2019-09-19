@@ -54,7 +54,7 @@ public:
         case CUSTOMER_ELIGIBLE: reward = get_eligibleReward();break;
         case CUSTOMER_INELIGIBLE:;break;
         case TECHNICAL_FAILURE_EXCEPTION:;break;
-        case INVALID_ACCOUNT_NUMBER_EXCEPTION:;break;
+        case INVALID_ACCOUNT_NUMBER_EXCEPTION:reward = "No rewards, the account number entered is invalid";break;
         }
         return reward;
     }
